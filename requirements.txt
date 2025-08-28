@@ -1,0 +1,19 @@
+# web
+Flask==3.0.3
+waitress==3.0.0
+
+# data + ML
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.11.4
+scikit-learn==1.4.2
+joblib==1.4.2
+
+# parquet
+pyarrow==15.0.2
+fastparquet==2024.5.0
+
+# misc
+PyYAML==6.0.1
+tzdata==2024.1
+

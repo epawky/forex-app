@@ -1,0 +1,11 @@
+# Don’t bake your data/models into the image; you’ll mount them
+data/
+models/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+.env
+.git
+.gitignore
