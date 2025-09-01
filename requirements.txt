@@ -1,19 +1,17 @@
 # web
-Flask==3.0.3
-waitress==3.0.0
+flask==3.0.3
+gunicorn==22.0.0
+apscheduler==3.10.4
+waitress==3.0.0     # optional for Windows local dev (not used in Docker)
 
 # data + ML
 numpy==1.26.4
 pandas==2.2.2
-scipy==1.11.4
 scikit-learn==1.4.2
+scipy==1.11.4
 joblib==1.4.2
-
-# parquet
-pyarrow==15.0.2
+pyarrow==16.1.0
 fastparquet==2024.5.0
-
-# misc
 PyYAML==6.0.1
-tzdata==2024.1
+tzdata==2025.2
 

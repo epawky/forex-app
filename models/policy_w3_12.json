@@ -1,0 +1,17 @@
+{
+  "auc": 0.7040317509685532,
+  "flip": false,
+  "acc": {
+    "score": 0.6610389610389611,
+    "threshold": 0.545
+  },
+  "mcc": {
+    "score": 0.3292424286360089,
+    "threshold": 0.39
+  },
+  "pnl": {
+    "score": 11966.699999999973,
+    "threshold": 0.505
+  },
+  "active": true
+}

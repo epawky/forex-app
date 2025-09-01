@@ -10,15 +10,27 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Install dependencies first (cache layer)
-COPY requirements.txt .
+# Install deps
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy your pipeline
-COPY fx_pipeline.py .
+# Copy code + static UI
+COPY fx_pipeline.py ./fx_pipeline.py
+COPY app.py ./app.py
+COPY static ./static
 
-# Create run-time dirs (you will mount host dirs here)
+# Create volumes
 RUN mkdir -p /app/data /app/models
 
-ENTRYPOINT ["python", "fx_pipeline.py"]
-CMD ["--help"]
+# Runtime env (change schedule via env at run-time)
+ENV DATA_DIR=/app/data \
+    MODELS_DIR=/app/models \
+    TICKS_GLOB=/app/data/ticks/*.csv \
+    ENABLE_SCHEDULER=1 \
+    SCHEDULE_UTC_HOUR=06 \
+    SCHEDULE_UTC_MINUTE=10
+
+EXPOSE 8000
+
+# Start API (APScheduler runs inside this process)
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:application"]
