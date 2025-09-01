@@ -1,7 +1,14 @@
-﻿data/
+# local data & models
+data/
 models/
 *.csv
 *.parquet
-.env
+
+# Python
 .venv*/
+__pycache__/
+*.pyc
+
+# Node / UI
 ui/node_modules/
+ui/dist/
