@@ -12,3 +12,4 @@ __pycache__/
 # Node / UI
 ui/node_modules/
 ui/dist/
+/env
