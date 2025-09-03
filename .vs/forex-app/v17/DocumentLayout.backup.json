@@ -1,0 +1,570 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\epawk\\source\\repos\\forex-app\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:app.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\.venv\\Scripts\\start.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:.venv\\Scripts\\start.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\.venv\\Scripts\\setup.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:.venv\\Scripts\\setup.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\requirements.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:requirements.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FigmaPage.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\src\\components\\FigmaPage.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\vite.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\vite.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\App.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\src\\App.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\postcss.config.cjs||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\src\\postcss.config.cjs||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\tailwind.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\tailwind.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\postcss.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\postcss.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\scripts\\pull-figma-assets.mjs||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\scripts\\pull-figma-assets.mjs||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|forex-app||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\scripts\\pull-figma-assets.mjs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\scripts\\pull-figma-assets.mjs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\public\\figma.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\public\\figma.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FXDashboard.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\src\\components\\FXDashboard.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\scrape.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:scrape.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\api.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\src\\api.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\template\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:template\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\static\\js\\app.js||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:static\\js\\app.js||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\static\\css\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:static\\css\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\template\\base.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:template\\base.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\epawk\\source\\repos\\forex-app\\mt5_collector.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:mt5_collector.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\.dockerignore||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:.dockerignore||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\fx_pipeline.py||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:fx_pipeline.py||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\wsgi.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:wsgi.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\forex_app.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:forex_app.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\forex-app.pyproj||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|888888fd-3c4a-40da-aefb-5ac10f5e8b30",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:forex-app.pyproj||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|888888fd-3c4a-40da-aefb-5ac10f5e8b30"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 15,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "start.ps1",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\.venv\\Scripts\\start.ps1",
+              "RelativeDocumentMoniker": ".venv\\Scripts\\start.ps1",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\.venv\\Scripts\\start.ps1",
+              "RelativeToolTip": ".venv\\Scripts\\start.ps1",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-02T00:17:34.219Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "setup.ps1",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\.venv\\Scripts\\setup.ps1",
+              "RelativeDocumentMoniker": ".venv\\Scripts\\setup.ps1",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\.venv\\Scripts\\setup.ps1",
+              "RelativeToolTip": ".venv\\Scripts\\setup.ps1",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-02T00:16:54.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": ".env",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\.env",
+              "RelativeDocumentMoniker": ".env",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\.env",
+              "RelativeToolTip": ".env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-01T20:55:22.343Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "postcss.config.cjs",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\postcss.config.cjs",
+              "RelativeDocumentMoniker": "ui\\src\\postcss.config.cjs",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\postcss.config.cjs",
+              "RelativeToolTip": "ui\\src\\postcss.config.cjs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-01T19:48:35.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "main.jsx",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\main.jsx",
+              "RelativeDocumentMoniker": "ui\\src\\main.jsx",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\main.jsx",
+              "RelativeToolTip": "ui\\src\\main.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-09-01T19:37:47.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\index.html",
+              "RelativeDocumentMoniker": "ui\\index.html",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\index.html",
+              "RelativeToolTip": "ui\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-09-01T19:32:22.16Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "pull-figma-assets.mjs",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\scripts\\pull-figma-assets.mjs",
+              "RelativeDocumentMoniker": "ui\\scripts\\pull-figma-assets.mjs",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\scripts\\pull-figma-assets.mjs",
+              "RelativeToolTip": "ui\\scripts\\pull-figma-assets.mjs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAqwDMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-01T19:26:23.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "pull-figma-assets.mjs",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\scripts\\pull-figma-assets.mjs",
+              "RelativeDocumentMoniker": "ui\\scripts\\pull-figma-assets.mjs",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\scripts\\pull-figma-assets.mjs",
+              "RelativeToolTip": "ui\\scripts\\pull-figma-assets.mjs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-01T19:26:00.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FigmaPage.jsx",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FigmaPage.jsx",
+              "RelativeDocumentMoniker": "ui\\src\\components\\FigmaPage.jsx",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FigmaPage.jsx",
+              "RelativeToolTip": "ui\\src\\components\\FigmaPage.jsx",
+              "ViewState": "AgIAADUBAAAAAAAAAAAiwFgBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-09-01T19:07:13.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "figma.html",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\public\\figma.html",
+              "RelativeDocumentMoniker": "ui\\public\\figma.html",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\public\\figma.html",
+              "RelativeToolTip": "ui\\public\\figma.html",
+              "ViewState": "AgIAALECAAAAAAAAAAAAANkCAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-09-01T19:06:08.971Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "App.jsx",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\App.jsx",
+              "RelativeDocumentMoniker": "ui\\src\\App.jsx",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\App.jsx",
+              "RelativeToolTip": "ui\\src\\App.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-09-01T18:26:18.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "FXDashboard.jsx",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FXDashboard.jsx",
+              "RelativeDocumentMoniker": "ui\\src\\components\\FXDashboard.jsx",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FXDashboard.jsx",
+              "RelativeToolTip": "ui\\src\\components\\FXDashboard.jsx",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAqwJEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-09-01T18:25:35.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "vite.config.js",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\vite.config.js",
+              "RelativeDocumentMoniker": "ui\\vite.config.js",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\vite.config.js",
+              "RelativeToolTip": "ui\\vite.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-01T05:27:36.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "index.css",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\index.css",
+              "RelativeDocumentMoniker": "ui\\src\\index.css",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\index.css",
+              "RelativeToolTip": "ui\\src\\index.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-09-01T05:12:42.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "app.py",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\app.py",
+              "RelativeDocumentMoniker": "app.py",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\app.py",
+              "RelativeToolTip": "app.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-08-28T03:03:39.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "requirements.txt",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\requirements.txt",
+              "RelativeDocumentMoniker": "requirements.txt",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\requirements.txt",
+              "RelativeToolTip": "requirements.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-08-28T03:04:12.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "scrape.js",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\scrape.js",
+              "RelativeDocumentMoniker": "scrape.js",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\scrape.js",
+              "RelativeToolTip": "scrape.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-01T18:17:35.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\.gitignore",
+              "RelativeDocumentMoniker": "ui\\.gitignore",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\.gitignore",
+              "RelativeToolTip": "ui\\.gitignore",
+              "ViewState": "AgIAABcAAAAAAAAAAAAgwBgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-01T05:59:24.103Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "mt5_collector.py",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\mt5_collector.py",
+              "RelativeDocumentMoniker": "mt5_collector.py",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\mt5_collector.py",
+              "RelativeToolTip": "mt5_collector.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-09-01T00:36:56.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "base.html",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\template\\base.html",
+              "RelativeDocumentMoniker": "template\\base.html",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\template\\base.html",
+              "RelativeToolTip": "template\\base.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-09-01T04:53:57.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "tailwind.config.js",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\tailwind.config.js",
+              "RelativeDocumentMoniker": "ui\\tailwind.config.js",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\tailwind.config.js",
+              "RelativeToolTip": "ui\\tailwind.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-01T05:12:17.812Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "styles.css",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\static\\css\\styles.css",
+              "RelativeDocumentMoniker": "static\\css\\styles.css",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\static\\css\\styles.css",
+              "RelativeToolTip": "static\\css\\styles.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-09-01T04:54:27.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "postcss.config.js",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\postcss.config.js",
+              "RelativeDocumentMoniker": "ui\\postcss.config.js",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\postcss.config.js",
+              "RelativeToolTip": "ui\\postcss.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-01T05:16:43.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "app.js",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\static\\js\\app.js",
+              "RelativeDocumentMoniker": "static\\js\\app.js",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\static\\js\\app.js",
+              "RelativeToolTip": "static\\js\\app.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-01T04:54:51.432Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": ".dockerignore",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\.dockerignore",
+              "RelativeDocumentMoniker": ".dockerignore",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\.dockerignore",
+              "RelativeToolTip": ".dockerignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-08-28T04:04:12.812Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "forex-app",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\forex-app.pyproj",
+              "RelativeDocumentMoniker": "forex-app.pyproj",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\forex-app.pyproj",
+              "RelativeToolTip": "forex-app.pyproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-08-28T03:06:49.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "api.js",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\api.js",
+              "RelativeDocumentMoniker": "ui\\src\\api.js",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\api.js",
+              "RelativeToolTip": "ui\\src\\api.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-01T05:28:09.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-08-28T04:00:23.691Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "fx_pipeline.py",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\fx_pipeline.py",
+              "RelativeDocumentMoniker": "fx_pipeline.py",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\fx_pipeline.py",
+              "RelativeToolTip": "fx_pipeline.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKIDAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-08-28T03:17:00Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\template\\index.html",
+              "RelativeDocumentMoniker": "template\\index.html",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\template\\index.html",
+              "RelativeToolTip": "template\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-08-28T03:05:57.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "wsgi.py",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\wsgi.py",
+              "RelativeDocumentMoniker": "wsgi.py",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\wsgi.py",
+              "RelativeToolTip": "wsgi.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-08-28T03:03:55.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "forex_app.py",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\forex_app.py",
+              "RelativeDocumentMoniker": "forex_app.py",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\forex_app.py",
+              "RelativeToolTip": "forex_app.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-08-28T03:02:06.846Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Visual Studio caches
+.vs/
+*.vsidx
+*.vsdix
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
