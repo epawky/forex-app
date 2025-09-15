@@ -1,32 +1,143 @@
 # -*- coding: utf-8 -*-
-# fx_pipeline.py
-# Single-file EURUSD pipeline: robust headless CSV ingest, per-window features,
-# manifest-locked training/prediction, threshold policies (acc/mcc/pnl),
-# and forward-holdout evaluation. Python 3.8+
+"""
+fx_pipeline.py
+Single-file FX pipeline:
+- Robust CSV ingest (→ UTC index + 'mid')
+- Per-window bars/features (daily, w2_10, w3_12)
+- Train/eval with manifest-locked columns
+- Threshold policies (acc/mcc/pnl)
+- Predict next session/day
+- Polygon.io historical downloader (minute bars)
+
+Python 3.8+
+"""
 
 from __future__ import annotations
 
 import argparse
+import csv
 import json
+import os
 import re
+import time
 from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 import numpy as np
 import pandas as pd
+import requests
 from joblib import dump, load
 from sklearn.linear_model import HuberRegressor, LogisticRegression
 from sklearn.metrics import (
     accuracy_score,
     brier_score_loss,
+    matthews_corrcoef,
     mean_absolute_error,
     roc_auc_score,
-    matthews_corrcoef,
 )
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+
+
+# ============================== Polygon downloader ===========================
+
+def _poly_fx_ticker(sym: str) -> str:
+    # Polygon FX tickers look like C:EURUSD
+    return f"C:{(sym or 'EURUSD').upper().replace('/', '')}"
+
+def _append_api_key(url: str, api_key: str) -> str:
+    """Ensure ?apiKey=... is present in the url (used for next_url pages)."""
+    pu = urlparse(url)
+    q = parse_qs(pu.query)
+    q["apiKey"] = [api_key]  # force/replace
+    # flatten singletons for urlencode
+    q_flat = {k: (v[0] if isinstance(v, list) and len(v) == 1 else v) for k, v in q.items()}
+    return urlunparse((pu.scheme, pu.netloc, pu.path, pu.params, urlencode(q_flat), pu.fragment))
+
+def download_polygon_history(
+    symbol,
+    out_dir,
+    years: int = 2,
+    timespan: str = "minute",
+    multiplier: int = 1,
+    api_key: Optional[str] = None,
+    rpm: int = 5,
+):
+    """
+    Download Polygon.io aggregated bars for an FX symbol into CSV under out_dir.
+    Returns a LIST with the written CSV path (or empty if nothing).
+    Accepts both "EURUSD" and "C:EURUSD".
+    """
+    api_key = (api_key or os.getenv("POLYGON_API_KEY") or "").strip()
+    if not api_key:
+        raise RuntimeError("POLYGON_API_KEY not set (env) and 'api_key' not provided")
+
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    # Normalize to Polygon FX ticker
+    if not str(symbol).upper().startswith("C:"):
+        symbol = _poly_fx_ticker(symbol)
+
+    # Date range
+    end = datetime.now(timezone.utc).date()
+    start = end - timedelta(days=365 * int(years))
+
+    outfile = out_dir / f"{symbol.replace(':','_')}_{timespan}_{int(multiplier)}_{start:%Y%m%d}_{end:%Y%m%d}.csv"
+    wrote_any = False
+
+    # Base URL + params (include apiKey)
+    url = f"https://api.polygon.io/v2/aggs/ticker/{symbol}/range/{int(multiplier)}/{timespan}/{start:%Y-%m-%d}/{end:%Y-%m-%d}"
+    params = {"adjusted": "true", "sort": "asc", "limit": 50000, "apiKey": api_key}
+
+    # Send key in headers too (some proxies drop query or headers; we do both)
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "X-Polygon-API-Key": api_key,
+    }
+
+    # throttle target (free plan ~5 rpm)
+    rpm = max(int(rpm or 5), 1)
+    sleep_s = max(int(60 / rpm), 12)
+
+    with open(outfile, "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["ts_utc", "open", "high", "low", "close", "volume", "vwap", "trades"])
+
+        while True:
+            r = requests.get(url, params=params, headers=headers, timeout=30)
+            if r.status_code == 429:
+                time.sleep(sleep_s)
+                continue
+            if r.status_code >= 300:
+                raise RuntimeError(f"Polygon {r.status_code}: {r.text[:200]}")
+
+            data = r.json() or {}
+            for row in data.get("results", []):
+                t_ms = int(row.get("t"))
+                ts = datetime.fromtimestamp(t_ms / 1000, tz=timezone.utc).isoformat()
+                w.writerow([
+                    ts,
+                    row.get("o"), row.get("h"), row.get("l"), row.get("c"),
+                    row.get("v"), row.get("vw"), row.get("n"),
+                ])
+                wrote_any = True
+
+            next_url = data.get("next_url")
+            if next_url:
+                # Be explicit: add apiKey to next_url and keep headers
+                url = _append_api_key(next_url, api_key)
+                params = {}  # next_url contains query already
+                time.sleep(sleep_s)
+                continue
+            break
+
+    return [str(outfile)] if wrote_any else []
+
 
 # ============================== Default Config ==============================
 
@@ -38,12 +149,12 @@ DEFAULT_CONFIG = {
         "econ_calendar": "data/econ_calendar.csv",
         "features_out": "data/features.parquet",
         "models_dir": "models",
-        "feats_only": "data/features_only.parquet",  # optional salvage
-        "labs_only": "data/labels_only.parquet",     # optional salvage
+        "feats_only": "data/features_only.parquet",   # optional salvage
+        "labs_only": "data/labels_only.parquet",      # optional salvage
     },
     "windows": {
         "daily": {"start": "00:00", "end": "23:59"},
-        "w2_10": {"start": "02:00", "end": "10:00"},  # ET-like example; adjust if needed
+        "w2_10": {"start": "02:00", "end": "10:00"},
         "w3_12": {"start": "03:00", "end": "12:00"},
     },
     "round_levels_pips": [10, 25, 50, 100],
@@ -55,10 +166,7 @@ DEFAULT_CONFIG = {
         "fail_backoff_pips": 2,
     },
     "exhaustion": {"ma_window": 20, "atr_window": 20},
-    "tick_volume": {
-        "baseline_days": 20,
-        "hot_threshold": 1.5,
-    },
+    "tick_volume": {"baseline_days": 20, "hot_threshold": 1.5},
     "pre_news": {
         "pre_window_minutes": 180,
         "post_window_minutes": 60,
@@ -75,15 +183,18 @@ def load_config(path: Optional[str]) -> dict:
     if path:
         p = Path(path)
         if p.exists():
-            import yaml
-            with p.open("r", encoding="utf-8") as f:
-                user = yaml.safe_load(f) or {}
-            # shallow merge at top-level + dict children
-            for k, v in user.items():
-                if isinstance(v, dict) and k in cfg and isinstance(cfg[k], dict):
-                    cfg[k].update(v)
-                else:
-                    cfg[k] = v
+            try:
+                import yaml  # optional
+                with p.open("r", encoding="utf-8") as f:
+                    user = yaml.safe_load(f) or {}
+                for k, v in user.items():
+                    if isinstance(v, dict) and k in cfg and isinstance(cfg[k], dict):
+                        cfg[k].update(v)
+                    else:
+                        cfg[k] = v
+            except Exception:
+                # If PyYAML not installed or parse error, just ignore overrides
+                pass
     return cfg
 
 def ensure_dir(d: str | Path) -> Path:
@@ -92,31 +203,22 @@ def ensure_dir(d: str | Path) -> Path:
     return p
 
 def ensure_manifests_from_dataset(df: pd.DataFrame, models_dir: Path) -> None:
-    """
-    Create per-window column manifests (cols_*.json) if they don't exist yet,
-    using the current dataset columns. This keeps train/predict aligned.
-    """
     models_dir = Path(models_dir)
     models_dir.mkdir(parents=True, exist_ok=True)
-
     for wkey in ["daily", "w2_10", "w3_12"]:
         p = models_dir / f"cols_{wkey}.json"
         if p.exists():
             continue
         if f"is_{wkey}" not in df.columns:
-            # dataset doesn't contain this window; skip
             continue
-
         feat_cols = (
-            [c for c in df.columns
-             if c.startswith(f"{wkey}_") and not (c.endswith("_up") or c.endswith("_pips"))]
+            [c for c in df.columns if c.startswith(f"{wkey}_") and not (c.endswith("_up") or c.endswith("_pips"))]
             + [c for c in df.columns if c.startswith("dow_")]
             + ["is_eom", "is_eoq", f"is_{wkey}"]
         )
         seen = set()
         feat_cols = [c for c in feat_cols if not (c in seen or seen.add(c))]
         p.write_text(json.dumps(feat_cols), encoding="utf-8")
-
 
 
 # ============================== CSV Ingestion ===============================
@@ -174,8 +276,8 @@ def _detect_datetime_column(df: pd.DataFrame) -> Optional[pd.Series]:
     keys = list(cols_norm.keys())
 
     direct = [
-        "timestamp","datetime","date_time","date time","gmt time","utc time",
-        "time gmt","time (gmt)","time (utc)","local time","bar time","bar start time","time","date"
+        "timestamp", "datetime", "date_time", "date time", "gmt time", "utc time",
+        "time gmt", "time (gmt)", "time (utc)", "local time", "bar time", "bar start time", "time", "date",
     ]
     for k in direct:
         if k in cols_norm:
@@ -211,8 +313,7 @@ def _detect_datetime_column(df: pd.DataFrame) -> Optional[pd.Series]:
 def read_tick_csv(path: Path) -> pd.DataFrame:
     """
     Return DataFrame indexed by UTC timestamp with a single 'mid' column.
-    Supports headered and headless CSVs. Headless:
-      col0=full datetime, col1=price  OR  col0=date, col1=time, col2=bid, col3=ask
+    Supports headered and headless CSVs.
     """
     # Try headered
     df = _read_csv_any_sep(path, header="infer")
@@ -312,6 +413,7 @@ def load_ticks(glob_pattern: str) -> pd.DataFrame:
     df = df[np.isfinite(df["mid"])]
     return df
 
+
 # ============================== Bars & Windows ==============================
 
 @dataclass
@@ -328,26 +430,19 @@ def _parse_hhmm(hhmm: str) -> Tuple[int, int]:
     h, m = hhmm.split(":")
     return int(h), int(m)
 
-def build_session_bars_for_window(
-    ticks_utc: pd.DataFrame, win: WindowDef, tz_pt: str
-) -> pd.DataFrame:
+def build_session_bars_for_window(ticks_utc: pd.DataFrame, win: WindowDef, tz_pt: str) -> pd.DataFrame:
     df = ticks_utc.copy()
-    pt_naive = _to_pt_naive(df.index, tz_pt)
+    pt_naive = _to_pt_naive(df.index, tz_pt)          # naive PT
     df = df.assign(pt_dt=pt_naive.values)
     df["pt_date"] = df["pt_dt"].dt.date
 
     from datetime import time as dtime
-    sh, sm = _parse_hhmm(win.start)
-    eh, em = _parse_hhmm(win.end)
-    start_t = dtime(sh, sm)
-    end_t = dtime(eh, em)
+    sh, sm = _parse_hhmm(win.start); eh, em = _parse_hhmm(win.end)
+    start_t = dtime(sh, sm); end_t = dtime(eh, em)
 
     def in_window(s: pd.Series) -> pd.Series:
         t = s.dt.time
-        if start_t <= end_t:
-            return (t >= start_t) & (t <= end_t)
-        else:
-            return (t >= start_t) | (t <= end_t)
+        return (t >= start_t) & (t <= end_t) if start_t <= end_t else ((t >= start_t) | (t <= end_t))
 
     groups = []
     for d, sub in df.groupby("pt_date", sort=True):
@@ -355,20 +450,33 @@ def build_session_bars_for_window(
         s = sub.loc[mask]
         if s.empty:
             continue
-        o = s["mid"].iloc[0]
-        h = s["mid"].max()
-        l = s["mid"].min()
-        c = s["mid"].iloc[-1]
-        # realized variance on 1-minute bars
-        spt = s.set_index(pd.DatetimeIndex(s["pt_dt"]).tz_localize(tz_pt))
-        m1 = spt["mid"].resample("1T").last().ffill()
+
+        o = s["mid"].iloc[0]; h = s["mid"].max(); l = s["mid"].min(); c = s["mid"].iloc[-1]
+
+        # --- FIX 1: localize with explicit DST rules (handles 2023-11-05 01:00 twice) ---
+        pt_index = pd.DatetimeIndex(s["pt_dt"])
+        try:
+            pt_tz = pt_index.tz_localize(tz_pt, ambiguous="infer", nonexistent="shift_forward")
+        except Exception:
+            # fallback if "infer" can’t decide: assume DST=True for duplicates
+            pt_tz = pt_index.tz_localize(tz_pt, ambiguous=True, nonexistent="shift_forward")
+
+        spt = s.set_index(pt_tz)
+
+        # --- FIX 2: use 'min' instead of '1T' (FutureWarning) ---
+        m1 = spt["mid"].resample("min").last().ffill()
+
         rv = (np.log(m1).diff() ** 2).sum()
-        groups.append(
-            {"pt_date": pd.to_datetime(str(d)), "open": o, "high": h, "low": l, "close": c, "rv": rv, "tick_count": len(s)}
-        )
+        groups.append({
+            "pt_date": pd.to_datetime(str(d)),
+            "open": o, "high": h, "low": l, "close": c,
+            "rv": rv, "tick_count": len(s)
+        })
+
     out = pd.DataFrame(groups).set_index("pt_date").sort_index()
     out.columns = pd.MultiIndex.from_product([[win.key], out.columns])
     return out
+
 
 def build_all_bars(ticks_utc: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     tz_pt = cfg["pt_timezone"]
@@ -380,6 +488,7 @@ def build_all_bars(ticks_utc: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     bars = [build_session_bars_for_window(ticks_utc, w, tz_pt) for w in wins]
     out = pd.concat(bars, axis=1).sort_index()
     return out
+
 
 # ============================== Features ====================================
 
@@ -627,6 +736,7 @@ def assemble_features(bars: pd.DataFrame, ticks_utc: pd.DataFrame, cfg: dict) ->
     features = pd.concat(blocks, axis=0).sort_index()
     return features
 
+
 # ============================== Labels & Dataset ============================
 
 def compute_labels(bars: pd.DataFrame, cfg: dict) -> pd.DataFrame:
@@ -651,6 +761,7 @@ def build_dataset(features: pd.DataFrame, labels: pd.DataFrame) -> pd.DataFrame:
         d = f.join(l, how="inner")
         parts.append(d)
     return pd.concat(parts, axis=0).sort_index() if parts else pd.DataFrame()
+
 
 # ============================== CV & Models =================================
 
@@ -681,6 +792,7 @@ def build_models() -> Models:
                     ("huber", HuberRegressor(max_iter=2000, epsilon=1.35, alpha=1e-4))])
     return Models(cls=cls, reg=reg)
 
+
 # ============================== Manifests ===================================
 
 def _save_cols(models_dir: Path, wkey: str, cols: List[str]) -> None:
@@ -695,9 +807,9 @@ def _load_cols(models_dir: Path, wkey: str) -> List[str]:
 
 def _synthesize_cols_from_dataset(df_cols, wkey: str) -> list:
     cols = (
-        [c for c in df_cols if c.startswith(f"{wkey}_")] +
-        [c for c in df_cols if c.startswith("dow_")] +
-        ["is_eom", "is_eoq", f"is_{wkey}"]
+        [c for c in df_cols if c.startswith(f"{wkey}_")]
+        + [c for c in df_cols if c.startswith("dow_")]
+        + ["is_eom", "is_eoq", f"is_{wkey}"]
     )
     seen = set()
     return [c for c in cols if not (c in seen or seen.add(c))]
@@ -715,6 +827,7 @@ def _cols_for_window_like_training(sub: pd.DataFrame, wkey: str, models_dir: Pat
             X[c] = 0.0
     X = X[cols].replace([np.inf, -np.inf], np.nan).fillna(0.0)
     return X
+
 
 # ============================== Train / Eval ================================
 
@@ -737,17 +850,13 @@ def train_and_eval_per_window(df: pd.DataFrame, cfg: dict, models_dir: Path) -> 
         y_reg_all = sub[f"{wkey}_pips"].astype(float)
 
         feat_cols = (
-            [c for c in sub.columns
-             if c.startswith(f"{wkey}_") and not (c.endswith("_up") or c.endswith("_pips"))]
+            [c for c in sub.columns if c.startswith(f"{wkey}_") and not (c.endswith("_up") or c.endswith("_pips"))]
             + [c for c in sub.columns if c.startswith("dow_")]
             + ["is_eom", "is_eoq", f"is_{wkey}"]
         )
-        # de-dupe preserving order
         seen = set()
         feat_cols = [c for c in feat_cols if not (c in seen or seen.add(c))]
-        # save manifest
         (Path(models_dir) / f"cols_{wkey}.json").write_text(json.dumps(feat_cols), encoding="utf-8")
-
 
         X_all = sub[feat_cols].replace([np.inf, -np.inf], np.nan).fillna(0.0)
 
@@ -806,6 +915,7 @@ def train_and_eval_per_window(df: pd.DataFrame, cfg: dict, models_dir: Path) -> 
 
     return metrics
 
+
 # ========================= Threshold tuning & policy ========================
 
 def _oof_probs_for_window(df: pd.DataFrame, cfg: dict, wkey: str, models_dir: Path) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -841,14 +951,13 @@ def _tune_thresholds(y: np.ndarray, p: np.ndarray, true_pips: np.ndarray) -> Dic
     if len(y) == 0:
         return {"auc": float("nan"), "flip": False, "acc": {}, "mcc": {}, "pnl": {}}
 
-    # ensure plain Python float here
     auc_val = float(roc_auc_score(y, p)) if len(np.unique(y)) > 1 else float("nan")
     grid = np.linspace(0.35, 0.65, 61)
-    best = {"acc": (-1, 0.5), "mcc": (-1, 0.5), "pnl": (-1e99, 0.5)}
+    best = {"acc": (-1.0, 0.5), "mcc": (-1.0, 0.5), "pnl": (-1e99, 0.5)}
 
     for t in grid:
         pred = (p >= t).astype(int)
-        acc = (pred == y).mean()
+        acc = float((pred == y).mean())
         if acc > best["acc"][0]:
             best["acc"] = (acc, float(t))
         mcc = matthews_corrcoef(y, pred) if len(np.unique(pred)) > 1 else -1.0
@@ -859,11 +968,11 @@ def _tune_thresholds(y: np.ndarray, p: np.ndarray, true_pips: np.ndarray) -> Dic
         if pnl > best["pnl"][0]:
             best["pnl"] = (pnl, float(t))
 
-    flip_bool = bool(auc_val < 0.5) if np.isfinite(auc_val) else False
+    flip_bool = bool(np.isfinite(auc_val) and (auc_val < 0.5))
 
     return {
         "auc": auc_val,
-        "flip": flip_bool,  # <— now a plain bool
+        "flip": flip_bool,
         "acc": {"score": float(best["acc"][0]), "threshold": float(best["acc"][1])},
         "mcc": {"score": float(best["mcc"][0]), "threshold": float(best["mcc"][1])},
         "pnl": {"score": float(best["pnl"][0]), "threshold": float(best["pnl"][1])},
@@ -882,7 +991,6 @@ def _to_native_jsonable(obj):
         return int(obj)
     return obj
 
-
 def build_and_save_policies(df: pd.DataFrame, cfg: dict, models_dir: Path) -> Dict[str, dict]:
     models_dir = ensure_dir(models_dir)
     policies = {}
@@ -895,7 +1003,6 @@ def build_and_save_policies(df: pd.DataFrame, cfg: dict, models_dir: Path) -> Di
             pol["note"] = "Window below AUC guard; keep inactive or use flip cautiously."
         path = Path(models_dir) / f"policy_{wkey}.json"
         path.write_text(json.dumps(_to_native_jsonable(pol), indent=2), encoding="utf-8")
-
         policies[wkey] = pol
     return policies
 
@@ -906,6 +1013,7 @@ def _load_policy(models_dir: Path, wkey: str) -> dict:
                 "acc": {"threshold": 0.5}, "mcc": {"threshold": 0.5}, "pnl": {"threshold": 0.5}}
     return json.loads(path.read_text(encoding="utf-8"))
 
+
 # ============================== Predict =====================================
 
 def _get_feat_matrix_for_predict(sub: pd.DataFrame, wkey: str, models_dir: Path) -> pd.DataFrame:
@@ -913,18 +1021,15 @@ def _get_feat_matrix_for_predict(sub: pd.DataFrame, wkey: str, models_dir: Path)
     try:
         feat_cols = _load_cols(models_dir, wkey)
     except FileNotFoundError:
-        # derive from dataset columns and persist so future runs are consistent
-        feat_cols = _cols_for_window(sub.columns, wkey)
+        feat_cols = _synthesize_cols_from_dataset(sub.columns, wkey)
         _save_cols(models_dir, wkey, feat_cols)
 
     X = sub.copy()
-    # add any missing columns and enforce order
     for c in feat_cols:
         if c not in X.columns:
             X[c] = 0.0
     X = X[feat_cols].replace([np.inf, -np.inf], np.nan).fillna(0.0)
     return X
-
 
 def predict_next_day(features: pd.DataFrame, cfg: dict, models_dir: Path, objective: str = "acc") -> Dict[str, Dict[str, float]]:
     out = {}
@@ -933,12 +1038,11 @@ def predict_next_day(features: pd.DataFrame, cfg: dict, models_dir: Path, object
         if sub.empty:
             continue
 
-        # Use manifest if present; otherwise derive & save
         X = _get_feat_matrix_for_predict(sub, wkey, models_dir)
         x_last = X.iloc[[-1]]
 
-        cls = load(models_dir / f"model_cls_{wkey}.joblib")
-        reg = load(models_dir / f"model_reg_{wkey}.joblib")
+        cls = load(Path(models_dir) / f"model_cls_{wkey}.joblib")
+        reg = load(Path(models_dir) / f"model_reg_{wkey}.joblib")
 
         proba_raw = float(cls.predict_proba(x_last)[:, 1][0])
 
@@ -974,11 +1078,6 @@ def build_all(cfg: dict) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     outp = Path(cfg["paths"]["features_out"])
     outp.parent.mkdir(parents=True, exist_ok=True)
     dataset.to_parquet(outp)
-
-    # Optional: keep salvage checkpoints if you want
-    # feats.to_parquet(Path(cfg["paths"]["feats_only"]))
-    # labels.to_parquet(Path(cfg["paths"]["labs_only"]))
-
     return ticks, bars, dataset
 
 def rebuild_from_checkpoints(cfg: dict) -> Optional[pd.DataFrame]:
@@ -997,74 +1096,98 @@ def rebuild_from_checkpoints(cfg: dict) -> Optional[pd.DataFrame]:
         return dataset
     return None
 
-# ============================== Holdout Eval =================================
 
+# ============================== Holdout Eval ================================
+
+# --- replace the existing evaluate_holdout with this version (NO PERSIST) ---
 def evaluate_holdout(df: pd.DataFrame, cfg: dict, cutoff: pd.Timestamp) -> Dict[str, Dict[str, float]]:
-    models_dir = ensure_dir(cfg["paths"]["models_dir"])
-    res = {}
+    """
+    Forward holdout that does NOT write models or manifests to disk.
+    Trains per-window models on df[df.index < cutoff] and evaluates on df[df.index >= cutoff].
+    Returns metrics per window.
+    """
+    res: Dict[str, Dict[str, float]] = {}
 
-    # Split
-    train_df = df[df.index < cutoff]
-    test_df  = df[df.index >= cutoff]
+    train_df = df[df.index < cutoff].copy()
+    test_df  = df[df.index >= cutoff].copy()
+    if train_df.empty or test_df.empty:
+        return res
 
-    # Train and persist on the train slice
-    _ = train_and_eval_per_window(train_df, cfg, models_dir)
+    def _feat_cols_from_training(cols, wkey: str) -> list:
+        # Synthesize the exact training-time feature list WITHOUT saving anything.
+        base = (
+            [c for c in cols if c.startswith(f"{wkey}_") and not (c.endswith("_up") or c.endswith("_pips"))]
+            + [c for c in cols if c.startswith("dow_")]
+            + ["is_eom", "is_eoq", f"is_{wkey}"]
+        )
+        seen = set()
+        return [c for c in base if not (c in seen or seen.add(c))]
 
-    # Evaluate on the test slice (guard against NaNs)
     for wkey in ["daily", "w2_10", "w3_12"]:
-        sub_tr = train_df[train_df["window"] == wkey]
-        sub_te = test_df[test_df["window"] == wkey]
-        if sub_tr.empty or sub_te.empty:
+        tr = train_df[train_df["window"] == wkey].copy()
+        te = test_df[test_df["window"] == wkey].copy()
+        if tr.empty or te.empty:
             continue
 
-        # Labels
-        yte_cls = sub_te[f"{wkey}_up"].astype(float)   # cast to float for nan-safe masks
-        yte_reg = sub_te[f"{wkey}_pips"].astype(float)
+        # Targets
+        ytr_cls = tr[f"{wkey}_up"].astype(int)
+        ytr_reg = tr[f"{wkey}_pips"].astype(float)
+        yte_cls = te[f"{wkey}_up"].astype(int)
+        yte_reg = te[f"{wkey}_pips"].astype(float)
 
-        # Features from manifest (add missing columns as 0, enforce order)
-        feat_cols = _load_cols(models_dir, wkey)
-        Xte = sub_te.copy()
-        for c in feat_cols:
-            if c not in Xte.columns:
-                Xte[c] = 0.0
-        Xte = Xte[feat_cols].replace([np.inf, -np.inf], np.nan).fillna(0.0)
+        # Feature columns from TRAINING ONLY (no disk I/O)
+        feat_cols = _feat_cols_from_training(tr.columns, wkey)
 
-        # Load models
-        cls = load(models_dir / f"model_cls_{wkey}.joblib")
-        reg = load(models_dir / f"model_reg_{wkey}.joblib")
+        def _prep_X(df_sub: pd.DataFrame, cols: list) -> pd.DataFrame:
+            X = df_sub.copy()
+            for c in cols:
+                if c not in X.columns:
+                    X[c] = 0.0
+            X = X[cols].replace([np.inf, -np.inf], np.nan).fillna(0.0)
+            return X
 
-        # ---- Classification metrics (mask only rows with valid yte_cls) ----
-        m_cls = yte_cls.notna().to_numpy()
-        if m_cls.any():
-            proba_up = np.full(len(yte_cls), np.nan, dtype=float)
-            proba_up[m_cls] = cls.predict_proba(Xte.iloc[m_cls])[:, 1]
-            pred_up = (proba_up[m_cls] >= 0.5).astype(int)
-            y_true_cls = yte_cls[m_cls].astype(int).to_numpy()
-            auc = float(roc_auc_score(y_true_cls, proba_up[m_cls])) if len(np.unique(y_true_cls)) > 1 else float("nan")
-            brier = float(brier_score_loss(y_true_cls, proba_up[m_cls]))
-            acc = float(accuracy_score(y_true_cls, pred_up))
-        else:
-            auc = float("nan"); brier = float("nan"); acc = float("nan")
+        Xtr = _prep_X(tr, feat_cols)
+        Xte = _prep_X(te, feat_cols)
 
-        # ---- Regression metrics (mask only rows with valid yte_reg) ----
-        m_reg = yte_reg.notna().to_numpy()
-        if m_reg.any():
-            y_pred_reg = reg.predict(Xte.iloc[m_reg])
-            mae = float(mean_absolute_error(yte_reg[m_reg], y_pred_reg))
-        else:
-            mae = float("nan")
+        # Fit models in-memory
+        m = build_models()
+        # Drop rows with NaNs in targets for safety
+        keep_tr = ytr_reg.notna()
+        keep_te = yte_reg.notna()
+        if keep_tr.sum() == 0 or Xtr.empty:
+            continue
+
+        m.cls.fit(Xtr.loc[keep_tr], ytr_cls.loc[keep_tr])
+        m.reg.fit(Xtr.loc[keep_tr], ytr_reg.loc[keep_tr])
+
+        # Classification metrics
+        auc = float("nan"); brier = float("nan"); acc = float("nan")
+        if yte_cls.notna().any():
+            proba_up = m.cls.predict_proba(Xte)[:, 1]
+            y_true   = yte_cls.to_numpy()
+            if len(np.unique(y_true)) > 1:
+                auc = float(roc_auc_score(y_true, proba_up))
+            brier = float(brier_score_loss(y_true, proba_up))
+            acc   = float(accuracy_score(y_true, (proba_up >= 0.5).astype(int)))
+
+        # Regression metric
+        mae = float("nan")
+        if keep_te.any():
+            y_pred = m.reg.predict(Xte.loc[keep_te])
+            mae = float(mean_absolute_error(yte_reg.loc[keep_te], y_pred))
 
         res[wkey] = {
             "AUC": auc,
             "Brier": brier,
             "Acc": acc,
             "MAE_pips": mae,
-            "n_train": int(len(sub_tr)),
-            "n_test": int(len(sub_te)),
-            "cutoff": str(cutoff.date()),
+            "n_train": int(len(tr)),
+            "n_test": int(len(te)),
+            "cutoff": str(pd.Timestamp(cutoff).date()),
         }
 
     return res
+
 
 
 # ============================== CLI =========================================
@@ -1073,25 +1196,61 @@ def main():
     ap = argparse.ArgumentParser(description="FX pipeline (single-file)")
     ap.add_argument("--config", type=str, default=None, help="Optional YAML config")
     ap.add_argument("--ticks-glob", type=str, default=None, help="Override ticks glob")
+    ap.add_argument("--symbol", type=str, default=None, help="Limit to a single symbol (e.g., EURUSD)")
 
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("build", help="Ingest ticks→bars→features+labels→dataset parquet")
     sub.add_parser("train", help="Train per-window models, persist manifests + policies")
+
     ap_pred = sub.add_parser("predict", help="Predict next session/day from latest dataset")
-    ap_pred.add_argument("--objective", choices=["acc", "mcc", "pnl"], default="acc",
-                         help="Decision rule to use (default: acc)")
+    ap_pred.add_argument(
+        "--objective",
+        choices=["acc", "mcc", "pnl"],
+        default="acc",
+        help="Decision rule to use (default: acc)",
+    )
+    ap_pred.add_argument(
+        "--symbol",
+        type=str,
+        default=None,
+        help="Optional: per-symbol run; switches features/models to symbol-specific paths (e.g., EURUSD, USDCHF)",
+    )
+
+
     hp = sub.add_parser("holdout", help="Forward holdout: train < cutoff, test ≥ cutoff")
     g = hp.add_mutually_exclusive_group(required=True)
     g.add_argument("--cutoff", type=str, help="Cutoff date YYYY-MM-DD")
     g.add_argument("--last-days", type=int, help="Use last N days as holdout (compute cutoff)")
 
+    # ---- parse & config ----
     args, _ = ap.parse_known_args()
     cfg = load_config(args.config)
     if args.ticks_glob:
         cfg["paths"]["ticks_glob"] = args.ticks_glob
+
+    # ---- per-symbol overrides (namespacing artifacts) ----
+    sym = (args.symbol or "").upper().replace("/", "") if getattr(args, "symbol", None) else ""
+    if sym:
+        cfg["paths"]["ticks_glob"]   = f"data/ticks/*{sym}*.csv"
+        cfg["paths"]["features_out"] = f"data/features_{sym}.parquet"
+        cfg["paths"]["feats_only"]   = f"data/features_only_{sym}.parquet"
+        cfg["paths"]["labs_only"]    = f"data/labels_only_{sym}.parquet"
+        cfg["paths"]["models_dir"]   = f"models/{sym}"
+
+    if getattr(args, "symbol", None):
+            sym = (args.symbol or "").upper().replace("/", "")
+            if sym:
+                cfg["paths"]["ticks_glob"]   = f"data/ticks/*{sym}*.csv"
+                cfg["paths"]["features_out"] = f"data/features_{sym}.parquet"
+                cfg["paths"]["feats_only"]   = f"data/features_only_{sym}.parquet"
+                cfg["paths"]["labs_only"]    = f"data/labels_only_{sym}.parquet"
+                cfg["paths"]["models_dir"]   = f"models/{sym}"
+       
+    # IMPORTANT: derive these AFTER overrides
     models_dir = ensure_dir(cfg["paths"]["models_dir"])
     features_p = Path(cfg["paths"]["features_out"])
 
+    # ---- commands ----
     if args.cmd == "build":
         ds = rebuild_from_checkpoints(cfg)
         if ds is not None:
@@ -1124,8 +1283,6 @@ def main():
                 _ = train_and_eval_per_window(df2, cfg, models_dir)
                 _ = build_and_save_policies(df2, cfg, models_dir)
         df = pd.read_parquet(features_p)
-        # Drop labels but keep 'window' to select per-window rows,
-        # feature construction is handled by column manifests.
         feats_for_pred = df.drop(columns=[c for c in df.columns if c.endswith("_pips") or c.endswith("_up")]).copy()
         preds = predict_next_day(feats_for_pred, cfg, models_dir, objective=getattr(args, "objective", "acc"))
         print(json.dumps(preds, indent=2))
@@ -1137,13 +1294,14 @@ def main():
                 print("[holdout] features parquet missing. Running build.")
                 _, _, _ = build_all(cfg)
         df = pd.read_parquet(features_p)
-        if args.cutoff:
+        if getattr(args, "cutoff", None):
             cutoff = pd.Timestamp(args.cutoff)
         else:
             last_days = int(args.last_days)
             cutoff = df.index.max() - pd.Timedelta(days=last_days)
         res = evaluate_holdout(df, cfg, cutoff)
         print(json.dumps(res, indent=2))
+
 
 if __name__ == "__main__":
     main()

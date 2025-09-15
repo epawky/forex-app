@@ -4473,6 +4473,7 @@
     <Compile Include=".venv\Lib\site-packages\_distutils_hack\__init__.py" />
     <Compile Include=".venv\Lib\site-packages\_yaml\__init__.py" />
     <Compile Include="app.py" />
+    <Compile Include="bootstrap.py" />
     <Compile Include="forex_app.py" />
     <Compile Include="static\js\app.js" />
     <Compile Include="ui\node_modules\flatted\python\flatted.py" />
@@ -6076,7 +6077,7 @@
     <Folder Include="ui\src\components\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".env" />
+    <Content Include=".env.example" />
     <Content Include=".venv\Lib\site-packages\APScheduler-3.10.4.dist-info\entry_points.txt" />
     <Content Include=".venv\Lib\site-packages\APScheduler-3.10.4.dist-info\INSTALLER" />
     <Content Include=".venv\Lib\site-packages\APScheduler-3.10.4.dist-info\LICENSE.txt" />
@@ -14094,6 +14095,7 @@
     <Content Include=".venv\Scripts\waitress-serve.exe" />
     <Content Include="Dockerfile" />
     <Content Include="fx_pipeline.py" />
+    <Content Include="INSTALLATION.md" />
     <Content Include="requirements.txt" />
     <Content Include="scrape.js" />
     <Content Include="static\css\styles.css" />
@@ -16756,7 +16758,6 @@
     <Content Include="ui\src\App.jsx" />
     <Content Include="ui\src\assets\react.svg" />
     <Content Include="ui\src\components\FigmaPage.jsx" />
-    <Content Include="ui\src\components\FXDashboard.jsx" />
     <Content Include="ui\src\index.css" />
     <Content Include="ui\src\main.jsx" />
     <Content Include="ui\src\postcss.config.cjs" />

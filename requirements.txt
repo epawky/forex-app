@@ -1,22 +1,32 @@
-# web
+# --- Web / Server ---
 flask==3.0.3
-gunicorn==22.0.0
-apscheduler==3.10.4
-waitress==3.0.0     # optional for Windows local dev (not used in Docker)
-
-# data + ML
-numpy==1.26.4
-pandas==2.2.2
-scikit-learn==1.4.2
-scipy==1.11.4
-joblib==1.4.2
-pyarrow==16.1.0
-fastparquet==2024.5.0
-PyYAML==6.0.1
-tzdata==2025.2
-
-
 flask-cors==4.0.1
 python-dotenv==1.0.1
+gunicorn==22.0.0 ; sys_platform != "win32"   # not used on Windows
+waitress==3.0.0 ; sys_platform == "win32"    # Windows-friendly WSGI
 
-MetaTrader5==5.0.45
+# --- Scheduling (optional) ---
+apscheduler==3.10.4
+
+# --- Data + ML ---
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.11.4
+scikit-learn==1.4.2
+joblib==1.4.2
+
+# Parquet (either works; we keep both so whichever is available can be used)
+pyarrow==16.1.0
+fastparquet==2024.5.0
+
+# YAML config support
+PyYAML==6.0.1
+
+# Timezone database for zoneinfo (needed on Windows/mac, server images)
+tzdata==2025.2
+
+# --- Networking ---
+requests==2.32.3
+
+# --- Optional / Windows-only integration ---
+MetaTrader5==5.0.45 ; sys_platform == "win32"
