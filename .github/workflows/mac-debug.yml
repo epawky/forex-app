@@ -1,0 +1,62 @@
+name: mac-debug
+on: workflow_dispatch
+
+jobs:
+  debug:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Optional: native tools you might need
+      # - name: Brew extras
+      #   run: |
+      #     brew update
+      #     brew install tesseract
+
+      - name: Backend deps (no servers)
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m venv .venv
+          source .venv/bin/activate
+          if [ -f backend/requirements.txt ]; then
+            pip install -r backend/requirements.txt
+          elif [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+
+      - name: Frontend deps (no servers)
+        if: ${{ hashFiles('frontend/package.json') != '' }}
+        shell: bash
+        run: |
+          cd frontend
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Quick sanity print
+        shell: bash
+        run: |
+          python -V
+          node -v
+          npm -v
+          ls -la backend backend/app backend/app/routers || true
+
+      - name: Start tmate (interactive shell on a Mac)
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+

@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\epawk\\source\\repos\\forex-app\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\requirements.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:requirements.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\INSTALLATION.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
       "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:INSTALLATION.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
@@ -58,7 +62,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "app.py",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\app.py",
               "RelativeDocumentMoniker": "app.py",
@@ -72,7 +76,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "App.jsx",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\App.jsx",
               "RelativeDocumentMoniker": "ui\\src\\App.jsx",
@@ -86,7 +90,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "fx_pipeline.py",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\fx_pipeline.py",
               "RelativeDocumentMoniker": "fx_pipeline.py",
@@ -101,6 +105,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "requirements.txt",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\requirements.txt",
+              "RelativeDocumentMoniker": "requirements.txt",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\requirements.txt",
+              "RelativeToolTip": "requirements.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-09-15T02:31:38.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "INSTALLATION.md",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\INSTALLATION.md",
               "RelativeDocumentMoniker": "INSTALLATION.md",
@@ -113,7 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "bootstrap.py",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\bootstrap.py",
               "RelativeDocumentMoniker": "bootstrap.py",
@@ -126,7 +143,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\index.html",
               "RelativeDocumentMoniker": "ui\\index.html",
@@ -139,7 +156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "index.css",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\index.css",
               "RelativeDocumentMoniker": "ui\\src\\index.css",
@@ -152,7 +169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "main.jsx",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\main.jsx",
               "RelativeDocumentMoniker": "ui\\src\\main.jsx",
@@ -165,7 +182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "FigmaPage.jsx",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FigmaPage.jsx",
               "RelativeDocumentMoniker": "ui\\src\\components\\FigmaPage.jsx",
@@ -178,7 +195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "api.js",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\api.js",
               "RelativeDocumentMoniker": "ui\\src\\api.js",
@@ -195,7 +212,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": ".env",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\.env",
               "RelativeDocumentMoniker": ".env",

@@ -24,6 +24,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include=".github\workflows\mac-debug.yml" />
     <Compile Include=".venv\Lib\site-packages\apscheduler\events.py" />
     <Compile Include=".venv\Lib\site-packages\apscheduler\executors\asyncio.py" />
     <Compile Include=".venv\Lib\site-packages\apscheduler\executors\base.py" />
@@ -4481,6 +4482,7 @@
     <Compile Include="wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".github\workflows\" />
     <Folder Include=".venv\" />
     <Folder Include=".venv\Include\" />
     <Folder Include=".venv\Lib\" />
@@ -5758,6 +5760,7 @@
     <Folder Include="data\" />
     <Folder Include="data\ticks\" />
     <Folder Include="models\" />
+    <Folder Include=".github\" />
     <Folder Include="static\" />
     <Folder Include="static\css\" />
     <Folder Include="static\js\" />
