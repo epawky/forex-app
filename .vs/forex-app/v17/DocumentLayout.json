@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\epawk\\source\\repos\\forex-app\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\.github\\workflows\\mac-debug.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:.github\\workflows\\mac-debug.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\bootstrap.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:bootstrap.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\.env.example||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:.env.example||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
@@ -13,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\INSTALLATION.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
       "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:INSTALLATION.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\bootstrap.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:bootstrap.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FigmaPage.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -58,11 +62,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "app.py",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\app.py",
               "RelativeDocumentMoniker": "app.py",
@@ -76,7 +80,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "App.jsx",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\App.jsx",
               "RelativeDocumentMoniker": "ui\\src\\App.jsx",
@@ -90,7 +94,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "fx_pipeline.py",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\fx_pipeline.py",
               "RelativeDocumentMoniker": "fx_pipeline.py",
@@ -104,7 +108,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "mac-debug.yml",
+              "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\.github\\workflows\\mac-debug.yml",
+              "RelativeDocumentMoniker": ".github\\workflows\\mac-debug.yml",
+              "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\.github\\workflows\\mac-debug.yml",
+              "RelativeToolTip": ".github\\workflows\\mac-debug.yml",
+              "ViewState": "AgIAACsAAAAAAAAAAAAgwD0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-09-21T21:54:28.88Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "requirements.txt",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\requirements.txt",
               "RelativeDocumentMoniker": "requirements.txt",
@@ -117,7 +138,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "INSTALLATION.md",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\INSTALLATION.md",
               "RelativeDocumentMoniker": "INSTALLATION.md",
@@ -130,20 +151,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "bootstrap.py",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\bootstrap.py",
               "RelativeDocumentMoniker": "bootstrap.py",
               "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\bootstrap.py",
               "RelativeToolTip": "bootstrap.py",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAkwGsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAkwGsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2025-09-15T02:27:49.497Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\index.html",
               "RelativeDocumentMoniker": "ui\\index.html",
@@ -156,7 +177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "index.css",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\index.css",
               "RelativeDocumentMoniker": "ui\\src\\index.css",
@@ -169,7 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "main.jsx",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\main.jsx",
               "RelativeDocumentMoniker": "ui\\src\\main.jsx",
@@ -182,7 +203,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "FigmaPage.jsx",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FigmaPage.jsx",
               "RelativeDocumentMoniker": "ui\\src\\components\\FigmaPage.jsx",
@@ -195,7 +216,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "api.js",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\api.js",
               "RelativeDocumentMoniker": "ui\\src\\api.js",
@@ -207,12 +228,8 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": ".env.example",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\.env.example",
               "RelativeDocumentMoniker": ".env.example",
@@ -222,10 +239,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-09-10T19:37:13.106Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         }
