@@ -55,10 +55,9 @@ jobs:
           npm -v
           ls -la backend backend/app backend/app/routers || true
 
-      - # .github/workflows/mac-debug.yml
+      # .github/workflows/mac-debug.yml
       - name: Start tmate session
         uses: mxschmitt/action-tmate@v3
         with:
           limit-access-to-actor: false   # allow joining with the printed link
-
 
