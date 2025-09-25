@@ -1,0 +1,38 @@
+services:
+  fx:
+    build:
+      context: .
+    image: forex-app:py310
+    container_name: forex-app
+    ports:
+      - "5001:5001"
+    environment:
+      # Backend serves the built UI if present
+      - SERVE_UI=1
+      # Data/model paths inside the container (bind-mounted below)
+      - DATA_DIR=/app/data
+      - MODELS_DIR=/app/models
+      - TICKS_GLOB=/app/data/ticks/*.csv
+      # Optional: set Polygon key here or via /api/polygon/credentials
+      # - POLYGON_API_KEY=your_key_here
+    volumes:
+      # Persist data & models on the host
+      - ./data:/app/data
+      - ./models:/app/models
+
+      # If you're serving static assets directly from Flask, keep this:
+      - ./static:/app/static:ro
+
+      # If you are serving the built frontend (Vite) from /ui/dist, use this instead of static:
+      # - ./ui/dist:/app/ui/dist:ro
+
+    restart: unless-stopped
+
+    healthcheck:
+      # Python is available in the image; use it to ping the health endpoint
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5001/api/health').read()"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+

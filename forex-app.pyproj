@@ -14096,6 +14096,7 @@
     <Content Include=".venv\Scripts\setup.ps1" />
     <Content Include=".venv\Scripts\start.ps1" />
     <Content Include=".venv\Scripts\waitress-serve.exe" />
+    <Content Include="docker-compose.yaml" />
     <Content Include="Dockerfile" />
     <Content Include="fx_pipeline.py" />
     <Content Include="INSTALLATION.md" />

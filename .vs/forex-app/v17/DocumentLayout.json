@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\epawk\\source\\repos\\forex-app\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:app.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\.github\\workflows\\mac-debug.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:.github\\workflows\\mac-debug.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
@@ -25,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FigmaPage.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:ui\\src\\components\\FigmaPage.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|solutionrelative:app.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD87C9F5-F2E8-459B-A991-F9E1575E8AAF}|forex-app.pyproj|C:\\Users\\epawk\\source\\repos\\forex-app\\fx_pipeline.py||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -62,17 +62,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "app.py",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\app.py",
               "RelativeDocumentMoniker": "app.py",
               "ToolTip": "C:\\Users\\epawk\\source\\repos\\forex-app\\app.py",
               "RelativeToolTip": "app.py",
-              "ViewState": "AgIAANQDAAAAAAAAAAAowAIEAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAL4EAAAAAAAAAAAowAIEAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2025-08-28T03:03:39.616Z",
               "IsPinned": true,
@@ -108,7 +108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "mac-debug.yml",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\.github\\workflows\\mac-debug.yml",
               "RelativeDocumentMoniker": ".github\\workflows\\mac-debug.yml",
@@ -125,7 +125,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "requirements.txt",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\requirements.txt",
               "RelativeDocumentMoniker": "requirements.txt",
@@ -138,7 +138,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "INSTALLATION.md",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\INSTALLATION.md",
               "RelativeDocumentMoniker": "INSTALLATION.md",
@@ -151,7 +151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "bootstrap.py",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\bootstrap.py",
               "RelativeDocumentMoniker": "bootstrap.py",
@@ -203,7 +203,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "FigmaPage.jsx",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\ui\\src\\components\\FigmaPage.jsx",
               "RelativeDocumentMoniker": "ui\\src\\components\\FigmaPage.jsx",
@@ -229,7 +229,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": ".env.example",
               "DocumentMoniker": "C:\\Users\\epawk\\source\\repos\\forex-app\\.env.example",
               "RelativeDocumentMoniker": ".env.example",
